@@ -1,0 +1,28 @@
+<nav class="p-2">
+  <ng-container *ngFor="let section of sections">
+    <div class="mb-2">
+      <button
+        class="w-full text-left flex items-center justify-between p-2 hover:bg-gray-400 rounded-md"
+        (click)="toggleSection(section)"
+      >
+        {{ section.name }}
+        <app-icons
+          name="caret-down"
+          *ngIf="section.sublinks.length > 1"
+          class="w-4 fill-current"
+          [ngClass]="{ 'rotate-180': section.isOpen }"
+        >
+        </app-icons>
+      </button>
+      <div *ngIf="section.isOpen" class="pl-4">
+        <a
+          *ngFor="let sublink of section.sublinks"
+          href="#"
+          class="block py-2 text-gray-400 hover:text-white ml-8"
+        >
+          {{ sublink }}
+        </a>
+      </div>
+    </div>
+  </ng-container>
+</nav>
