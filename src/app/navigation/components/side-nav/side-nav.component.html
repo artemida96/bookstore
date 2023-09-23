@@ -1,7 +1,8 @@
-<nav class="p-2">
+<div class="p-2">
   <ng-container *ngFor="let section of sections">
     <div class="mb-2">
-      <button
+      <a
+        [routerLink]="section.urlLink"
         class="w-full text-left flex items-center justify-between p-2 hover:bg-gray-400 rounded-md"
         (click)="toggleSection(section)"
       >
@@ -13,16 +14,17 @@
           [ngClass]="{ 'rotate-180': section.isOpen }"
         >
         </app-icons>
-      </button>
+      </a>
       <div *ngIf="section.isOpen" class="pl-4">
         <a
+          [routerLink]="[sublink.urlLink]"
           *ngFor="let sublink of section.sublinks"
           href="#"
           class="block py-2 text-gray-400 hover:text-white ml-8"
         >
-          {{ sublink }}
+          {{ sublink.name }}
         </a>
       </div>
     </div>
   </ng-container>
-</nav>
+</div>

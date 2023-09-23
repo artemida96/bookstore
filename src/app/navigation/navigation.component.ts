@@ -1,4 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations'
+//import { animate, state, style, transition, trigger } from '@angular/animations'
 import { ChangeDetectionStrategy, Component } from '@angular/core'
 
 @Component({
@@ -9,13 +9,13 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
   host: {
     class: 'flex flex-col flex-grow',
   },
-  animations: [
+  /*animations: [
     trigger('sidebarAnimation', [
       state('open', style({ transform: 'translateX(0)' })),
       state('closed', style({ transform: 'translateX(-100%)' })),
       transition('open <=> closed', animate('300ms ease-in-out')),
     ]),
-  ],
+  ],*/
 })
 export class NavigationComponent {
   isModalOpen = false

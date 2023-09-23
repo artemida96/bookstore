@@ -1,5 +1,6 @@
 import { Component } from '@angular/core'
 import { Section } from '../../types/section.type'
+import { SubSection } from '../../types/sub-section.type'
 
 @Component({
   selector: 'app-side-nav',
@@ -8,16 +9,15 @@ import { Section } from '../../types/section.type'
 })
 export class SideNavComponent {
   sections: Section[] = [
-    { name: 'Dashboard', sublinks: [], isOpen: false },
-    {
-      name: 'Book Categories',
-      sublinks: ['Drama', 'Horror', 'Mystery', 'Travel', 'Jurnal', 'Science'],
-      isOpen: false,
-    },
+    { name: 'Dashboard', sublinks: [], isOpen: false, urlLink: '/dashboard' },
     {
       name: 'Manage Books',
-      sublinks: ['Book List', 'Add books'],
+      sublinks: [
+        { name: 'Book List', urlLink: '/book-list' },
+        { name: 'Add books', urlLink: '/add-book' },
+      ],
       isOpen: false,
+      urlLink: '',
     },
   ]
 

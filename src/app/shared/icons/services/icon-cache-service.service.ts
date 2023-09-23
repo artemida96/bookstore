@@ -4,25 +4,25 @@ import { Observable, shareReplay } from 'rxjs'
 
 @Injectable({ providedIn: 'root' })
 export class IconsCacheService {
-  private iconsMap = new Map<string, Observable<string>>()
+  private icons = new Map<string, Observable<string>>()
 
   constructor(private httpClient: HttpClient) {}
 
-  loadIcon(iconName: string) {
-    const cachedIcon = this.iconsMap.get(iconName)
+  loadIcon(name: string) {
+    const cachedIcon = this.icons.get(name)
 
     if (cachedIcon) {
       return cachedIcon
     }
 
-    const iconRequest = this.httpClient
-      .get(`../assets/${iconName}.svg`, {
+    const icon$ = this.httpClient
+      .get(`./assets/svg/${name}.svg`, {
         responseType: 'text',
       })
       .pipe(shareReplay(1))
 
-    this.iconsMap.set(iconName, iconRequest)
+    this.icons.set(name, icon$)
 
-    return iconRequest
+    return icon$
   }
 }

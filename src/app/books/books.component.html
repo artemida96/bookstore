@@ -1,0 +1,13 @@
+<div
+  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+>
+  <div
+    *ngFor="let book of books$ | async"
+    class="border rounded-lg p-2 w-64 text-center shadow-md bg-gray-50"
+  >
+    <!-- Book Cover -->
+    <img [src]="''" alt="No Image" class="border h-32 w-24 mx-auto" />
+    <!-- Book Title -->
+    <div class="font-semibold mt-2">{{ book.title }}</div>
+  </div>
+</div>

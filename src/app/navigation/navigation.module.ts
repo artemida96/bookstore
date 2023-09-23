@@ -20,6 +20,11 @@ import { SideNavComponent } from './components/side-nav/side-nav.component'
           ),
       },
       {
+        path: 'book-list',
+        loadChildren: () =>
+          import('../books/books.module').then((module) => module.BooksModule),
+      },
+      {
         path: '**',
         redirectTo: '',
       },

@@ -1,6 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core'
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser'
-import { EMPTY, Observable, map } from 'rxjs'
+import { EMPTY, Observable, catchError, map } from 'rxjs'
 import { IconsCacheService } from './services/icon-cache-service.service'
 
 @Component({
@@ -12,9 +18,8 @@ import { IconsCacheService } from './services/icon-cache-service.service'
     class: 'inline-block',
   },
 })
-export class IconsComponent {
+export class IconsComponent implements OnChanges {
   @Input() name = ''
-
   icon$: Observable<SafeHtml> = EMPTY
 
   constructor(
@@ -22,13 +27,20 @@ export class IconsComponent {
     private iconsCacheService: IconsCacheService
   ) {}
 
-  ngOnChanges() {
-    if (!this.name) {
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes['name'] || !changes['name'].currentValue) {
       throw new Error('No icon name provided!')
     }
 
-    this.icon$ = this.iconsCacheService
-      .loadIcon(this.name)
-      .pipe(map((icon) => this.domSanitizer.bypassSecurityTrustHtml(icon)))
+    this.icon$ = this.loadIcon(changes['name'].currentValue)
+  }
+
+  private loadIcon(iconName: string): Observable<SafeHtml> {
+    return this.iconsCacheService.loadIcon(iconName).pipe(
+      catchError(() => {
+        return EMPTY
+      }),
+      map((icon) => this.domSanitizer.bypassSecurityTrustHtml(icon))
+    )
   }
 }
