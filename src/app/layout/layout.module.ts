@@ -24,6 +24,19 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'book',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'add',
+        loadChildren: () =>
+          import('../books/add-book/add-book.module').then(
+            (module) => module.AddBookModule
+          ),
+      },
+    ],
+  },
+  {
     path: '**',
     component: LayoutComponent,
   },

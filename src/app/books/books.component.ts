@@ -6,7 +6,8 @@ import {
   selectBooksLoading,
 } from './selectors/books.selectors'
 import { loadBooks } from './actions/books.actions'
-import { ActivatedRoute, Router } from '@angular/router'
+import { Router } from '@angular/router'
+import { take, withLatestFrom } from 'rxjs'
 
 @Component({
   selector: 'app-books',
@@ -24,11 +25,16 @@ export class BooksComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private router: Router,
-    private activatedRoute: ActivatedRoute
+    private router: Router
   ) {}
   ngOnInit(): void {
-    this.store.dispatch(loadBooks())
+    this.books$
+      .pipe(take(1), withLatestFrom(this.books$))
+      .subscribe(([books]) => {
+        if (!books.length) {
+          this.store.dispatch(loadBooks())
+        }
+      })
   }
 
   goToBookDetails(isbn: string) {
