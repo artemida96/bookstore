@@ -6,7 +6,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
   styleUrls: ['./nav-bar.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'flex flex-col bg-gray-100 overflow-y-auto',
+    class: 'flex flex-col overflow-hidden',
   },
 })
 export class NavBarComponent {}

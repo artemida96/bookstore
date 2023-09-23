@@ -6,9 +6,21 @@ import { StoreModule } from '@ngrx/store'
 import { BooksEffects } from './effects/books.effects'
 import { booksReducer } from './reducers/books.reducers'
 import { RouterModule, Routes } from '@angular/router'
+import { BookDetailsComponent } from './book-details/book-details.component'
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', component: BooksComponent },
+  {
+    path: '',
+    pathMatch: 'full',
+    component: BooksComponent,
+  },
+  {
+    path: 'category/:isbn',
+    loadChildren: () =>
+      import('./book-details/book-details.module').then(
+        (m) => m.BookDetailsModule
+      ),
+  },
 ]
 
 @NgModule({
@@ -19,5 +31,6 @@ const routes: Routes = [
     StoreModule.forFeature('books', booksReducer),
     EffectsModule.forFeature([BooksEffects]),
   ],
+  exports: [BooksComponent],
 })
 export class BooksModule {}

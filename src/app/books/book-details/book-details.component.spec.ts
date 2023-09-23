@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { SideNavComponent } from './side-nav.component'
+import { BookDetailsComponent } from './book-details.component'
 
-describe('SideNavComponent', () => {
-  let component: SideNavComponent
-  let fixture: ComponentFixture<SideNavComponent>
+describe('BookDetailsComponent', () => {
+  let component: BookDetailsComponent
+  let fixture: ComponentFixture<BookDetailsComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [SideNavComponent],
+      declarations: [BookDetailsComponent],
     }).compileComponents()
 
-    fixture = TestBed.createComponent(SideNavComponent)
+    fixture = TestBed.createComponent(BookDetailsComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

@@ -6,7 +6,7 @@ import {
   loadBooksFailure,
   loadBooksSuccess,
 } from '../actions/books.actions'
-import { catchError, map, of, switchMap } from 'rxjs'
+import { catchError, map, of, switchMap, take } from 'rxjs'
 
 @Injectable()
 export class BooksEffects {

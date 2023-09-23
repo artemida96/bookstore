@@ -7,20 +7,25 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component'
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'home',
     component: LayoutComponent,
     children: [
       {
         path: '',
         loadChildren: () =>
-          import('../navigation/navigation.module').then(
-            (module) => module.NavigationModule
+          import('../dashboard/dashboard.module').then(
+            (module) => module.DashboardModule
           ),
       },
-      {
-        path: '**',
-        component: LayoutComponent,
-      },
     ],
+  },
+  {
+    path: '**',
+    component: LayoutComponent,
   },
 ]
 

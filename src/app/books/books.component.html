@@ -1,13 +1,24 @@
 <div
   class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
 >
-  <div
-    *ngFor="let book of books$ | async"
-    class="border rounded-lg p-2 w-64 text-center shadow-md bg-gray-50"
-  >
-    <!-- Book Cover -->
-    <img [src]="''" alt="No Image" class="border h-32 w-24 mx-auto" />
-    <!-- Book Title -->
-    <div class="font-semibold mt-2">{{ book.title }}</div>
+  <div *ngFor="let book of books$ | async" class="block text-decoration-none">
+    <div class="border rounded-lg p-2 w-64 text-center shadow-md bg-gray-50">
+      <!-- Book Cover -->
+      <img [src]="''" alt="No Image" class="border h-32 w-24 mx-auto" />
+      <!-- Book Title -->
+      <div class="font-semibold mt-2">{{ book.title }}</div>
+      <!-- Container for Centering Book Cover and Button -->
+      <div class="flex flex-col items-center mt-4">
+        <!-- Button -->
+        <button
+          type="button"
+          class="bg-yellow-500 px-4 py-2 rounded-lg"
+          (click)="goToBookDetails(book.isbn)"
+        >
+          Learn more
+        </button>
+      </div>
+    </div>
   </div>
 </div>
+<router-outlet></router-outlet>
