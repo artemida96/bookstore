@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store'
-import { BookDto } from '../dto/book.dto'
 import { CreateBookDto } from '../dto/create-book.dto'
+import { BookDto } from '../dto/book.dto'
 
 export const loadBooks = createAction('[Book] Load Books')
 
@@ -17,4 +17,13 @@ export const loadBooksFailure = createAction(
 export const addBooks = createAction(
   '[Book] Add Books',
   props<{ books: CreateBookDto[] }>()
+)
+
+export const setSearchTerm = createAction(
+  '[Search] Set Search Term',
+  props<{ searchTerm?: string }>()
+)
+export const updateFilter = createAction(
+  '[Filter] Update Filter',
+  props<{ filterCriteria?: CreateBookDto }>()
 )

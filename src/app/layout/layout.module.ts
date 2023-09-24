@@ -37,6 +37,20 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'search',
+    component: LayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () =>
+          import('../books/search-books/search-books.module').then(
+            (module) => module.SearchBooksModule
+          ),
+      },
+    ],
+  },
+
+  {
     path: '**',
     component: LayoutComponent,
   },

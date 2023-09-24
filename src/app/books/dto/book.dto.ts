@@ -1,3 +1,4 @@
+//according with the data set,json some fields are missing-> optional
 export interface BookDto {
   isbn: string
   title: string
@@ -8,4 +9,9 @@ export interface BookDto {
   pages: number
   description: string
   website: string
+  categories?: string
+  rating?: number
+  isbn10?: string
+  isbn13?: string
+  options?: string
 }

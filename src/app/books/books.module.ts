@@ -6,7 +6,6 @@ import { StoreModule } from '@ngrx/store'
 import { BooksEffects } from './effects/books.effects'
 import { booksReducer } from './reducers/books.reducers'
 import { RouterModule, Routes } from '@angular/router'
-import { BookDetailsComponent } from './book-details/book-details.component'
 
 const routes: Routes = [
   {

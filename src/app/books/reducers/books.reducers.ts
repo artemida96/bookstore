@@ -1,16 +1,20 @@
 import { createReducer, on } from '@ngrx/store'
-import { BookDto } from '../dto/book.dto'
 import {
   addBooks,
   loadBooks,
   loadBooksFailure,
   loadBooksSuccess,
+  setSearchTerm,
+  updateFilter,
 } from '../actions/books.actions'
-
+import { BookDto } from '../dto/book.dto'
+import { CreateBookDto } from '../dto/create-book.dto'
 export interface BooksState {
   books: BookDto[]
   loading: boolean
-  error: any
+  error?: any
+  filterCriteria?: CreateBookDto
+  search?: string
 }
 
 const initialState: BooksState = {
@@ -43,7 +47,16 @@ export const booksReducer = createReducer(
       isbn10: book.isbn10.toString(),
       isbn13: book.isbn13.toString(),
     }))
-    console.log({ ...state, books: [...state.books, ...updatedBooks] })
     return { ...state, books: [...state.books, ...updatedBooks] }
+  }),
+  on(setSearchTerm, (state, action) => ({
+    ...state,
+    search: action.searchTerm,
+  })),
+  on(updateFilter, (state, action) => {
+    return {
+      ...state,
+      filterCriteria: action.filterCriteria,
+    }
   })
 )

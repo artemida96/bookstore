@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core'
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { loadBooks } from './books/actions/books.actions'
 
 @Component({
   selector: 'app-root',
@@ -9,4 +11,9 @@ import { ChangeDetectionStrategy, Component } from '@angular/core'
     class: 'flex flex-col flex-grow h-full overflow-hidden',
   },
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(private store: Store) {}
+  ngOnInit(): void {
+    this.store.dispatch(loadBooks())
+  }
+}

@@ -1,0 +1,196 @@
+<div class="bg-gray-100 p-4 rounded">
+  <div class="text-xl text-center font-semibold">Search to find books</div>
+  <div class="flex gap-x-2 mb-4">
+    <input
+      type="text"
+      id="searchTerm"
+      [(ngModel)]="searchTerm"
+      placeholder="Search..."
+      class="flex-1 bg-gray-200 text-gray-700 border rounded py-2 px-3"
+    />
+    <button
+      (click)="search()"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Search
+    </button>
+    <button
+      (click)="clearSearch()"
+      class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+    >
+      Clear Search
+    </button>
+  </div>
+
+  <!-- Show Filters Button -->
+  <button
+    class="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+    (click)="toggleFilters()"
+  >
+    {{ showFilters ? 'Hide Filters' : 'Show Filters' }}
+  </button>
+
+  <!-- Filter Form Container -->
+  <div class="mt-4 p-4 border bg-white rounded shadow" *ngIf="showFilters">
+    <form [formGroup]="$any(filterForm)" (ngSubmit)="applyFilters()">
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 gap-4"
+      >
+        <div class="col-span-1 mb-4">
+          <label
+            for="categories"
+            class="block text-gray-700 text-sm font-bold mb-2"
+            >Category:</label
+          >
+          <input
+            type="text"
+            id="categories"
+            formControlName="categories"
+            class="w-full md:w-2/3 lg:w-1/2 bg-gray-200 text-gray-700 border rounded py-2 px-3"
+          />
+        </div>
+        <div class="col-span-1 mb-4">
+          <label
+            for="published"
+            class="block text-gray-700 text-sm font-bold mb-2"
+            >Year:</label
+          >
+          <input
+            type="number"
+            id="published"
+            formControlName="published"
+            class="w-full md:w-2/3 lg:w-1/2 bg-gray-200 text-gray-700 border rounded py-2 px-3"
+          />
+        </div>
+        <div class="col-span-1 mb-4">
+          <label for="author" class="block text-gray-700 text-sm font-bold mb-2"
+            >Author:</label
+          >
+          <input
+            type="text"
+            id="author"
+            formControlName="author"
+            class="w-full md:w-2/3 lg:w-1/2 bg-gray-200 text-gray-700 border rounded py-2 px-3"
+          />
+        </div>
+        <div class="col-span-1 mb-4">
+          <label for="title" class="block text-gray-700 text-sm font-bold mb-2"
+            >Title:</label
+          >
+          <input
+            type="text"
+            id="title"
+            formControlName="title"
+            class="w-full md:w-2/3 lg:w-1/2 bg-gray-200 text-gray-700 border rounded py-2 px-3"
+          />
+        </div>
+        <div class="col-span-1 mb-4">
+          <label for="isbn" class="block text-gray-700 text-sm font-bold mb-2"
+            >ISBN:</label
+          >
+          <input
+            type="text"
+            id="isbn"
+            formControlName="isbn"
+            class="w-full md:w-2/3 lg:w-1/2 bg-gray-200 text-gray-700 border rounded py-2 px-3"
+          />
+        </div>
+        <div class="col-span-1 mb-4">
+          <label for="isbn10" class="block text-gray-700 text-sm font-bold mb-2"
+            >ISBN-10:</label
+          >
+          <input
+            type="text"
+            id="isbn10"
+            formControlName="isbn10"
+            class="w-full md:w-2/3 lg:w-1/2 bg-gray-200 text-gray-700 border rounded py-2 px-3"
+          />
+        </div>
+        <div class="col-span-1 mb-4">
+          <label for="isbn13" class="block text-gray-700 text-sm font-bold mb-2"
+            >ISBN-13:</label
+          >
+          <input
+            type="text"
+            id="isbn13"
+            formControlName="isbn13"
+            class="w-full md:w-2/3 lg:w-1/2 bg-gray-200 text-gray-700 border rounded py-2 px-3"
+          />
+        </div>
+        <div class="col-span-1 mb-4">
+          <label for="pages" class="block text-gray-700 text-sm font-bold mb-2"
+            >Pages:</label
+          >
+          <input
+            type="number"
+            id="pages"
+            formControlName="pages"
+            class="w-full md:w-2/3 lg:w-1/2 bg-gray-200 text-gray-700 border rounded py-2 px-3"
+          />
+        </div>
+        <div class="col-span-1 mb-4">
+          <label
+            for="publisher"
+            class="block text-gray-700 text-sm font-bold mb-2"
+            >Publisher:</label
+          >
+          <input
+            type="text"
+            id="publisher"
+            formControlName="publisher"
+            class="w-full md:w-2/3 lg:w-1/2 bg-gray-200 text-gray-700 border rounded py-2 px-3"
+          />
+        </div>
+        <div class="col-span-2 mb-4">
+          <label
+            for="description"
+            class="block text-gray-700 text-sm font-bold mb-2"
+            >Description:</label
+          >
+          <input
+            type="text"
+            id="description"
+            formControlName="description"
+            class="w-full bg-gray-200 text-gray-700 border rounded py-2 px-3"
+          />
+        </div>
+      </div>
+      <div class="flex gap-x-2 mt-4">
+        <button
+          [disabled]="isFormUnchanged()"
+          type="submit"
+          class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Apply Filters
+        </button>
+        <button
+          (click)="resetFilters()"
+          class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+        >
+          Clear Filters
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Book Display Section -->
+<div
+  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4"
+>
+  <div
+    *ngFor="let book of combinedFilteredBooks$ | async"
+    class="block text-decoration-none"
+  >
+    <div class="border rounded-lg p-2 w-64 text-center shadow-md bg-gray-50">
+      <!-- Display book details here -->
+      <img [src]="''" alt="No Image" class="border h-32 w-24 mx-auto" />
+      <div class="font-semibold mt-2">{{ book.title }}</div>
+      <div class="flex flex-col items-center mt-4">
+        <button type="button" class="bg-yellow-500 px-4 py-2 rounded-lg">
+          Learn more
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
