@@ -3,14 +3,13 @@ import { CommonModule } from '@angular/common'
 import { AddBookComponent } from './add-book.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
-import { InputFieldsModule } from 'src/app/shared/input-fields/input-fields.module'
+import { BookFormComponent } from './book-form/book-form.component'
 
 @NgModule({
-  declarations: [AddBookComponent],
+  declarations: [AddBookComponent, BookFormComponent],
   imports: [
     CommonModule,
     FormsModule,
-    InputFieldsModule,
     ReactiveFormsModule,
     RouterModule.forChild([
       { path: '', pathMatch: 'full', component: AddBookComponent },

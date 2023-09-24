@@ -1,12 +1,24 @@
-import { Component, Input } from '@angular/core'
-import { FormControl } from '@angular/forms'
+import { Component, Input, forwardRef } from '@angular/core'
+import {
+  ControlValueAccessor,
+  FormBuilder,
+  FormControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms'
 
 @Component({
   selector: 'app-input-fields',
   templateUrl: './input-fields.component.html',
   styleUrls: ['./input-fields.component.css'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputFieldsComponent),
+      multi: true,
+    },
+  ],
 })
-export class InputFieldsComponent {
+export class InputFieldsComponent implements ControlValueAccessor {
   @Input() label?: string
   @Input() controlName!: string | number | null
   @Input() inputType?: string
@@ -15,6 +27,24 @@ export class InputFieldsComponent {
   @Input() invalid?: boolean
   @Input() errorMessage?: string
   @Input() formControl?: FormControl
+  @Input() form?: any
+
+  value?: string
+
+  onChange: (value: string) => void = () => {}
+  onTouched: () => void = () => {}
+
+  writeValue(value: string): void {
+    this.value = value
+  }
+
+  registerOnChange(fn: (value: string) => void): void {
+    this.onChange = fn
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn
+  }
 
   onKeyPress(event: KeyboardEvent) {
     if (this.inputType === 'number') {

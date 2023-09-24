@@ -18,6 +18,7 @@ export class BooksEffects {
   loadBooks$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadBooks),
+      take(1),
       switchMap(() =>
         this.bookService.getAllBooks().pipe(
           map(({ books }) => {
