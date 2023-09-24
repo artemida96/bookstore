@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
-import { Store } from '@ngrx/store'
 import { loadBooks } from './books/actions/books.actions'
+import { Store } from '@ngrx/store'
 
 @Component({
   selector: 'app-root',

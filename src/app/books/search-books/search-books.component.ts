@@ -131,6 +131,10 @@ export class SearchBooksComponent implements OnInit {
     )
   }
 
+  goToBookDetails(isbn: string) {
+    this.router.navigate(['/home/category', isbn])
+  }
+
   search() {
     this.store.dispatch(setSearchTerm({ searchTerm: this.searchTerm }))
     this.filteredBooks$ = this.store.select(selectFilteredBooksBySearch)

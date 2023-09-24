@@ -13,7 +13,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 export class BookFormComponent {
   @Input() bookForm: FormGroup = this.fb.group({
     options: [''],
-    rating: [''],
     title: [
       '',
       [
@@ -59,6 +58,16 @@ export class BookFormComponent {
         Validators.required,
         Validators.max(9999),
         Validators.pattern('^[0-9]*$'),
+      ],
+    ],
+    rating: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(1),
+        Validators.pattern(/^\d{1}$/),
+        Validators.pattern('^[1-5]*$'),
       ],
     ],
     isbn10: [

@@ -1,5 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store'
 import { BooksState } from '../reducers/books.reducers'
+import { BookDto } from '../dto/book.dto'
 
 export const selectBooksState = createFeatureSelector<BooksState>('books')
 
@@ -50,20 +51,6 @@ export const selectFilteredBooksBySearch = createSelector(
   }
 )
 
-type FieldMappings = {
-  isbn: string
-  title: string
-  author: string
-  publisher: string
-  published: Date
-  pages: number
-  description: string
-  categories: string
-  rating: number
-  isbn10: string
-  isbn13: string
-}
-
 //This way, items will only be included in the results if they match all the applied filter criteria with AND
 export const selectFilteredBooks = createSelector(
   selectBooks,
@@ -87,7 +74,19 @@ export const selectFilteredBooks = createSelector(
           const year = new Date(item[field]).getFullYear().toString()
           return year === filterValue.toString()
         }
-        const fieldValue = item[field as keyof FieldMappings]
+
+        if (field === 'categories') {
+          const itemCategories = item[field]
+            ?.split(',')
+            .map((value) => value.trim().toLowerCase())
+          const filterCategories = filterValue
+            .split(',')
+            .map((value: string) => value.trim().toLowerCase())
+          return filterCategories.some(
+            (filterCategory: string) => itemCategories?.includes(filterCategory)
+          )
+        }
+        const fieldValue = item[field as keyof BookDto]
         return compareField(fieldValue, filterValue)
       })
     })
@@ -95,19 +94,17 @@ export const selectFilteredBooks = createSelector(
 )
 
 function compareField(
-  fieldValue: string | number | undefined | Date,
+  fieldValue: string | number | undefined,
   filterValue: string | number | undefined
 ): boolean {
   if (!filterValue) {
     return false
   }
-  console.log(fieldValue, filterValue)
   if (typeof fieldValue === 'number' && typeof filterValue === 'number') {
-    // Compare numeric values as numbers
     return fieldValue === filterValue
   }
 
-  if (typeof fieldValue === 'string' || fieldValue instanceof Date) {
+  if (typeof fieldValue === 'string') {
     if (fieldValue === null) {
       return false
     }
@@ -121,11 +118,7 @@ function compareField(
   return false
 }
 function preprocessString(str: string): string {
-  // Convert to lowercase
   str = str.toLowerCase()
-
-  // Remove symbols and spaces
   str = str.replace(/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/\s]/g, '')
-
   return str
 }

@@ -3,13 +3,21 @@
 >
   <div *ngFor="let book of books$ | async" class="block text-decoration-none">
     <div class="border rounded-lg p-2 w-64 text-center shadow-md bg-gray-50">
-      <!-- Book Cover -->
-      <img [src]="''" alt="No Image" class="border h-32 w-24 mx-auto" />
-      <!-- Book Title -->
+      <div
+        class="w-24 h-32 bg-gray-200 flex items-center justify-center mx-auto"
+      >
+        <img
+          [src]="''"
+          alt="No image"
+          class="w-full h-auto lg:w-64 lg:h-64"
+          *ngIf="''; else noImage"
+        />
+        <ng-template #noImage>
+          <span class="text-gray-300 text-lg font-semibold">Image</span>
+        </ng-template>
+      </div>
       <div class="font-semibold mt-2">{{ book.title }}</div>
-      <!-- Container for Centering Book Cover and Button -->
       <div class="flex flex-col items-center mt-4">
-        <!-- Button -->
         <button
           type="button"
           class="bg-yellow-500 px-4 py-2 rounded-lg"

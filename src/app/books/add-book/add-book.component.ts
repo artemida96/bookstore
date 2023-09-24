@@ -35,7 +35,6 @@ export class AddBookComponent {
   addNewBook() {
     const bookFormGroup: FormGroup = this.fb.group({
       options: [''],
-      rating: [''],
       title: [
         '',
         [
@@ -105,6 +104,16 @@ export class AddBookComponent {
           Validators.maxLength(13),
           Validators.pattern(/^\d{13}$/),
           Validators.pattern('^[0-9]*$'),
+        ],
+      ],
+      rating: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(1),
+          Validators.pattern(/^\d{1}$/),
+          Validators.pattern('^[1-5]*$'),
         ],
       ],
     })

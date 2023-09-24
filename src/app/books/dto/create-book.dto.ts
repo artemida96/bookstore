@@ -8,4 +8,5 @@ export interface CreateBookDto extends BookDto {
   isbn10: string
   isbn13: string
   options?: string
+  img?: string
 }
