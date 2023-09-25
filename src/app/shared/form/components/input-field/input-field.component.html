@@ -1,0 +1,28 @@
+<div class="pb-6">
+  <label for="{{ label }}" class="text-gray-700 text-sm font-bold md:w-1/3"
+    >{{ label }}:</label
+  >
+  <div class="relative" *ngIf="!(type === 'textarea'); else textAreaInput">
+    <input
+      [placeholder]="placeholder"
+      [value]="value"
+      [type]="type"
+      (input)="onInputChange($event)"
+      class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+    />
+  </div>
+  <ng-template #textAreaInput>
+    <textarea
+      [placeholder]="placeholder"
+      [value]="value"
+      (input)="onInputChange($event)"
+      class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+    ></textarea>
+  </ng-template>
+  <p
+    *ngIf="formControl?.invalid && formControl?.touched"
+    class="text-red-500 text-xs mt-1"
+  >
+    {{ validationMessage }}
+  </p>
+</div>

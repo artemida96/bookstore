@@ -3,271 +3,31 @@
 >
   <form [formGroup]="bookForm" class="md:flex md:space-x-10">
     <div class="w-full md:w-2/3 space-y-4">
-      <div class="pb-6">
-        <label for="title" class="text-gray-700 text-sm font-bold md:w-1/3"
-          >Title:</label
-        >
-        <div class="relative">
-          <input
-            formControlName="title"
-            type="text"
-            class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            placeholder="Enter title (10-120 characters)"
-          />
-          <p
-            *ngIf="
-              bookForm.get('title')?.invalid &&
-              (bookForm.get('title')?.dirty || bookForm.get('title')?.touched)
-            "
-            class="absolute text-red-500 text-xs mt-1"
-          >
-            Please enter a valid title (10-120 characters).
-          </p>
-        </div>
-      </div>
-      <div class="pb-6">
-        <label
-          for="description"
-          class="text-gray-700 text-sm font-bold md:w-1/3"
-          >Description:</label
-        >
-        <div class="relative">
-          <textarea
-            formControlName="description"
-            class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50 overflow-auto"
-            placeholder="Enter description (max 512 characters)"
-            style="max-height: 100px"
-          ></textarea>
-          <p
-            *ngIf="
-              bookForm.get('description')?.invalid &&
-              (bookForm.get('description')?.dirty ||
-                bookForm.get('description')?.touched)
-            "
-            class="absolute text-red-500 text-xs mt-1"
-          >
-            Please enter a valid description (max 512 characters).
-          </p>
-        </div>
-      </div>
-      <div class="pb-6">
-        <label for="categories" class="text-gray-700 text-sm font-bold md:w-1/3"
-          >Categories:</label
-        >
-        <div class="relative">
-          <input
-            formControlName="categories"
-            type="text"
-            class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            placeholder="Enter categories (comma-separated)"
-          />
-          <p
-            *ngIf="
-              bookForm.get('categories')?.invalid &&
-              (bookForm.get('categories')?.dirty ||
-                bookForm.get('categories')?.touched)
-            "
-            class="absolute text-red-500 text-xs mt-1"
-          >
-            Please enter valid categories (comma-separated).
-          </p>
-        </div>
-      </div>
-      <div class="pb-6">
-        <label for="author" class="text-gray-700 text-sm font-bold md:w-1/3"
-          >Author Name:</label
-        >
-        <div class="relative">
-          <input
-            formControlName="author"
-            type="text"
-            class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            placeholder="Enter author names (comma-separated)"
-          />
-          <p
-            *ngIf="
-              bookForm.get('autho')?.invalid &&
-              (bookForm.get('author')?.dirty || bookForm.get('author')?.touched)
-            "
-            class="absolute text-red-500 text-xs mt-1"
-          >
-            Please enter valid author names (comma-separated).
-          </p>
-        </div>
-      </div>
-      <div class="pb-6">
-        <label for="publisher" class="text-gray-700 text-sm font-bold md:w-1/3"
-          >Publisher:</label
-        >
-        <div class="relative">
-          <input
-            formControlName="publisher"
-            type="text"
-            class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            placeholder="Enter publisher (min 5, max 60 characters)"
-          />
-          <p
-            *ngIf="
-              bookForm.get('publisher')?.invalid &&
-              (bookForm.get('publisher')?.dirty ||
-                bookForm.get('publisher')?.touched)
-            "
-            class="absolute text-red-500 text-xs mt-1"
-          >
-            Please enter a valid publisher (min 5, max 60 characters).
-          </p>
-        </div>
-      </div>
-      <div class="pb-6">
-        <label for="published" class="text-gray-700 text-sm font-bold md:w-1/3"
-          >Year:</label
-        >
-        <div class="relative">
-          <input
-            formControlName="published"
-            type="number"
-            class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            placeholder="Enter year (4 digits)"
-          />
-          <p
-            *ngIf="
-              bookForm.get('published')?.invalid &&
-              (bookForm.get('published')?.dirty ||
-                bookForm.get('published')?.touched)
-            "
-            class="absolute text-red-500 text-xs mt-1"
-          >
-            Please enter a valid year (4 digits).
-          </p>
-        </div>
-      </div>
-      <div class="pb-6">
-        <label for="pages" class="text-gray-700 text-sm font-bold md:w-1/3"
-          >Page Numbers:</label
-        >
-        <div class="relative">
-          <input
-            formControlName="pages"
-            type="number"
-            class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            placeholder="Enter number of pages (max 9999)"
-          />
-          <p
-            *ngIf="
-              bookForm.get('pages')?.invalid &&
-              (bookForm.get('pages')?.dirty || bookForm.get('pages')?.touched)
-            "
-            class="absolute text-red-500 text-xs mt-1"
-          >
-            Please enter a valid number of pages (max 9999).
-          </p>
-        </div>
-      </div>
+      <ng-container *ngFor="let field of formFields?.slice(0, 7)">
+        <app-input-field
+          [fieldName]="field.name"
+          [formControlName]="field.name"
+          [formControl]="$any(bookForm.get(field.name))"
+          [label]="field.label"
+          [placeholder]="field.label"
+          [validationMessage]="field.validationMessage"
+          [type]="field.type"
+        ></app-input-field>
+      </ng-container>
     </div>
-    <div class="w-full md:w-1/3 space-y-4 md:space-y-4">
-      <div class="pb-6">
-        <label for="options" class="text-gray-700 text-sm font-bold md:w-1/3"
-          >Options:</label
-        >
-        <div class="relative">
-          <input
-            formControlName="options"
-            type="text"
-            class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            placeholder="Options"
-          />
-          <p
-            *ngIf="
-              bookForm.get('options')?.invalid &&
-              (bookForm.get('options')?.dirty ||
-                bookForm.get('options')?.touched)
-            "
-            class="absolute text-red-500 text-xs mt-1"
-          >
-            Please enter valid options.
-          </p>
-        </div>
-      </div>
 
-      <div class="pb-6">
-        <label for="rating" class="text-gray-700 text-sm font-bold md:w-1/3"
-          >Rating:</label
-        >
-        <div class="relative">
-          <input
-            formControlName="rating"
-            type="number"
-            class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            placeholder="Rating"
-          />
-          <p
-            *ngIf="
-              bookForm.get('rating')?.invalid &&
-              (bookForm.get('rating')?.dirty || bookForm.get('rating')?.touched)
-            "
-            class="absolute text-red-500 text-xs mt-1"
-          >
-            Please enter a rating from 1 to 5
-          </p>
-        </div>
-      </div>
-
-      <div class="pb-6">
-        <label for="isbn10" class="text-gray-700 text-sm font-bold md:w-1/3"
-          >ISBN-10:</label
-        >
-        <div class="relative">
-          <input
-            formControlName="isbn10"
-            type="number"
-            class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            placeholder="Enter ISBN-10 (10 digits)"
-          />
-          <p
-            *ngIf="
-              bookForm.get('isbn10')?.invalid &&
-              (bookForm.get('isbn10')?.dirty || bookForm.get('isbn10')?.touched)
-            "
-            class="absolute text-red-500 text-xs mt-1"
-          >
-            Please enter a valid ISBN-10 (10 digits).
-          </p>
-        </div>
-      </div>
-      <div class="pb-6">
-        <label for="isbn13" class="text-gray-700 text-sm font-bold md:w-1/3"
-          >ISBN-13:</label
-        >
-        <div class="relative">
-          <input
-            formControlName="isbn13"
-            type="number"
-            class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-            placeholder="Enter ISBN-13 (13 digits)"
-          />
-          <p
-            *ngIf="
-              bookForm.get('isbn13')?.invalid &&
-              (bookForm.get('isbn13')?.dirty || bookForm.get('isbn13')?.touched)
-            "
-            class="absolute text-red-500 text-xs mt-1"
-          >
-            Please enter a valid ISBN-13 (13 digits).
-          </p>
-        </div>
-      </div>
-      <div class="pb-6">
-        <label for="image" class="text-gray-700 text-sm font-bold md:w-1/3"
-          >Image:</label
-        >
-        <div class="relative">
-          <input
-            type="file"
-            accept=".jpg,.png,.gif"
-            class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-          />
-        </div>
-      </div>
+    <div class="w-full md:w-2/3 space-y-4 md:space-y-4">
+      <ng-container *ngFor="let field of formFields?.slice(7, 11)">
+        <app-input-field
+          [fieldName]="field.name"
+          [formControlName]="field.name"
+          [formControl]="$any(bookForm.get(field.name))"
+          [label]="field.label"
+          [placeholder]="field.label"
+          [validationMessage]="field.validationMessage"
+          [type]="field.type"
+        ></app-input-field>
+      </ng-container>
     </div>
   </form>
 </div>

@@ -1,5 +1,8 @@
 <div class="flex flex-col gap-y-10">
-  <app-book-form [bookForm]="$any(bookFormArray.controls[0])"></app-book-form>
+  <app-book-form
+    [bookForm]="$any(bookFormArray.controls[0])"
+    [formFields]="formFields"
+  ></app-book-form>
   <div
     *ngFor="let bookFormGroup of bookFormArray.controls; let i = index"
     [hidden]="i === 0"
@@ -11,7 +14,10 @@
       >
         Remove Book
       </button>
-      <app-book-form [bookForm]="$any(bookFormGroup)"></app-book-form>
+      <app-book-form
+        [bookForm]="$any(bookFormGroup)"
+        [formFields]="formFields"
+      ></app-book-form>
     </div>
   </div>
   <button
