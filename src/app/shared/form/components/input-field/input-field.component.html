@@ -4,11 +4,13 @@
   >
   <div class="relative" *ngIf="!(type === 'textarea'); else textAreaInput">
     <input
+      [name]="fieldName"
       [placeholder]="placeholder"
       [value]="value"
+      typeField
       [type]="type"
       (input)="onInputChange($event)"
-      class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      class="w-full flex-grow"
     />
   </div>
   <ng-template #textAreaInput>
@@ -16,7 +18,7 @@
       [placeholder]="placeholder"
       [value]="value"
       (input)="onInputChange($event)"
-      class="flex-grow w-full px-3 py-2 rounded-md border focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+      class="flex-grow w-full"
     ></textarea>
   </ng-template>
   <p

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
 import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms'
+import { FormFieldConfig } from 'src/app/shared/form/types/form-field-config.type'
 
 @Component({
   selector: 'app-book-form',
@@ -11,15 +12,7 @@ import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms'
   },
 })
 export class BookFormComponent {
-  @Input() formFields!: {
-    name: string
-    label: string
-    type: string
-    validationMessage: string
-    validators: ((
-      control: AbstractControl<any, any>
-    ) => ValidationErrors | null)[]
-  }[]
+  @Input() formFields!: FormFieldConfig[]
   @Input() bookForm!: FormGroup
 
   constructor() {}

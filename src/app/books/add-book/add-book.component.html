@@ -9,8 +9,9 @@
   >
     <div class="flex flex-col gap-y-1">
       <button
+        ty="button"
         (click)="removeBook(i)"
-        class="self-center bg-red-500 px-4 py-2 rounded-md shadow-md"
+        class="self-center bg-warning w-32 rounded-md py-2 shadow-md"
       >
         Remove Book
       </button>
@@ -22,7 +23,7 @@
   </div>
   <button
     type="button"
-    class="mt-8 self-center bg-orange-400 w-48 px-4 py-2 rounded-md shadow-md"
+    class="mt-8 self-center bg-primary w-48 rounded-md py-2 shadow-md"
     (click)="addNewBook()"
   >
     Add Another Book
@@ -30,8 +31,8 @@
 
   <button
     type="button"
-    [ngClass]="booksSaved ? 'bg-green-700' : 'bg-blue-400'"
-    class="mt-8 self-start w-48 px-4 py-2 rounded-md shadow-md"
+    [ngClass]="booksSaved ? 'bg-success' : 'bg-secondary'"
+    class="mt-8 self-start w-48 px-4 py-2 bg-info rounded-md shadow-md"
     [disabled]="isAnyFormGroupInvalid()"
     (click)="save()"
   >

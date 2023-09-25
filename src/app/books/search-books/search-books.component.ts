@@ -6,15 +6,8 @@ import {
 } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { Store } from '@ngrx/store'
+import { setSearchTerm, updateFilter } from '../actions/books.actions'
 import {
-  loadBooks,
-  setSearchTerm,
-  updateFilter,
-} from '../actions/books.actions'
-import { CreateBookDto } from '../dto/create-book.dto'
-import {
-  selectBooks,
-  selectFilterCriteria,
   selectFilteredBooks,
   selectFilteredBooksBySearch,
   selectSearchTerm,
@@ -23,8 +16,6 @@ import {
   Observable,
   Subject,
   combineLatest,
-  forkJoin,
-  map,
   mergeMap,
   of,
   startWith,
@@ -32,6 +23,7 @@ import {
 } from 'rxjs'
 import { BookDto } from '../dto/book.dto'
 import { NavigationEnd, Router } from '@angular/router'
+import { FormFieldConfig } from 'src/app/shared/form/types/form-field-config.type'
 
 @Component({
   selector: 'app-search-books',
@@ -39,8 +31,7 @@ import { NavigationEnd, Router } from '@angular/router'
   styleUrls: ['./search-books.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class:
-      'flex flex-col flex-grow overflow-hidden p-6 min-h-screen bg-gray-100',
+    class: 'flex flex-col flex-grow overflow-hidden p-6 bg-gray-200',
   },
 })
 export class SearchBooksComponent implements OnInit {
@@ -52,8 +43,66 @@ export class SearchBooksComponent implements OnInit {
 
   private unsubscribe$ = new Subject<void>()
 
+  formFields: FormFieldConfig[] = [
+    {
+      name: 'title',
+      label: 'Title',
+      type: 'text',
+    },
+    {
+      name: 'description',
+      label: 'Description',
+      type: 'textarea',
+    },
+    {
+      name: 'categories',
+      label: 'Categories',
+      type: 'text',
+    },
+    {
+      name: 'author',
+      label: 'Author Name',
+      type: 'text',
+    },
+    {
+      name: 'publisher',
+      label: 'Publisher',
+      type: 'text',
+    },
+    {
+      name: 'published',
+      label: 'Year',
+      type: 'text',
+    },
+    {
+      name: 'pages',
+      label: 'Page Numbers',
+      type: 'number',
+    },
+    {
+      name: 'options',
+      label: 'Options',
+      type: 'text',
+    },
+    {
+      name: 'rating',
+      label: 'Rating',
+      type: 'text',
+    },
+    {
+      name: 'isbn10',
+      label: 'ISBN-10',
+      type: 'text',
+    },
+    {
+      name: 'isbn13',
+      label: 'ISBN-13',
+      type: 'text',
+    },
+  ]
+
   ngOnInit(): void {
-    this.initBookForm()
+    this.initFilterForm()
     const searchTerm$ = this.store.select(selectSearchTerm).pipe(startWith(''))
 
     // Listen for router navigation end events
@@ -91,29 +140,21 @@ export class SearchBooksComponent implements OnInit {
     private router: Router // Inject the Router service
   ) {}
 
-  initBookForm() {
-    this.filterForm = this.fb.group({
-      categories: [undefined],
-      published: undefined,
-      author: undefined,
-      title: undefined,
-      isbn: undefined,
-      isbn10: undefined,
-      isbn13: undefined,
-      pages: undefined,
-      publisher: undefined,
-      description: undefined,
-      rating: undefined,
+  initFilterForm() {
+    this.filterForm = this.fb.group({})
+    this.formFields.forEach((field) => {
+      this.filterForm?.addControl(field.name, this.fb.control(''))
     })
   }
   resetFilters() {
-    this.initBookForm()
+    this.initFilterForm()
     this.store.dispatch(updateFilter({ filterCriteria: undefined }))
   }
 
   applyFilters() {
     this.clearSearch()
     const filterCriteria = this.filterForm?.value
+    console.log(filterCriteria)
     this.store.dispatch(updateFilter({ filterCriteria }))
   }
 

@@ -1,15 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms'
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { CreateBookDto } from '../dto/create-book.dto'
 import { addBooks } from '../actions/books.actions'
 import { Store } from '@ngrx/store'
 import { Router } from '@angular/router'
+import { FormFieldConfig } from 'src/app/shared/form/types/form-field-config.type'
 
 @Component({
   selector: 'app-add-book',
@@ -17,11 +12,11 @@ import { Router } from '@angular/router'
   styleUrls: ['./add-book.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'flex flex-col flex-grow overflow-hidden mt-4 p-6 ',
+    class: 'flex flex-col flex-grow overflow-hidden p-6 bg-gray-200',
   },
 })
 export class AddBookComponent {
-  formFields = [
+  formFields: FormFieldConfig[] = [
     {
       name: 'title',
       label: 'Title',
@@ -173,7 +168,6 @@ export class AddBookComponent {
 
   addNewBook() {
     this.bookFormArray.push(this.createFormGroup())
-    console.log(this.bookFormArray)
   }
   /*if we had b/e make endpoint and add book, implement effect + reducer*/
   save() {

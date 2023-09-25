@@ -1,4 +1,10 @@
-import { Component, Input, forwardRef } from '@angular/core'
+import {
+  Component,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  forwardRef,
+} from '@angular/core'
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
@@ -25,13 +31,13 @@ export class InputFieldComponent implements ControlValueAccessor {
   @Input() validationMessage?: string
   @Input() type?: string
 
-  value: string = ''
+  value?: string | number
 
   onChange: any = () => {}
   onTouched: any = () => {}
 
   writeValue(value: any): void {
-    this.value = value || ''
+    this.value = value
     this.onChange(this.value)
   }
 
@@ -45,6 +51,15 @@ export class InputFieldComponent implements ControlValueAccessor {
 
   onInputChange(event: Event): void {
     this.value = (event.target as HTMLInputElement).value
+    const inputValue = (event.target as HTMLInputElement).value
+    const parsedValue = parseFloat(inputValue)
+
+    if (!isNaN(parsedValue) && this.type === 'number') {
+      this.value = parsedValue
+    } else {
+      this.value = inputValue
+    }
+
     this.onChange(this.value)
     this.onTouched()
   }

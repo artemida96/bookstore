@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary rounded-md text-gray-200 font-semibold hover:bg-primary-300 focus:outline-none focus:ring-2 focus:bg-primary-400 focus:ring-opacity-75;
+  }
+  .btn-primary:disabled {
+    opacity: 0.7; /* Adjust the opacity as needed */
+  }
+}

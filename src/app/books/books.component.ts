@@ -13,8 +13,7 @@ import { Router } from '@angular/router'
   styleUrls: ['./books.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class:
-      'flex flex-col flex-grow overflow-hidden p-6 min-h-screen bg-gray-100',
+    class: 'flex flex-col flex-grow overflow-hidden p-6 bg-gray-200 ',
   },
 })
 export class BooksComponent {

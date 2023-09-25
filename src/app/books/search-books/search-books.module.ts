@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common'
 import { SearchBooksComponent } from './search-books.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
+import { FormModule } from 'src/app/shared/form/form-module.module'
 
 @NgModule({
   declarations: [SearchBooksComponent],
@@ -10,6 +11,7 @@ import { RouterModule } from '@angular/router'
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    FormModule,
     RouterModule.forChild([
       {
         path: '',

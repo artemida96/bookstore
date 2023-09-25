@@ -11,8 +11,7 @@ import { loadBooks } from '../actions/books.actions'
   styleUrls: ['./book-details.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class:
-      'flex flex-col flex-grow overflow-hidden p-6 bg-gray-100 min-h-screen',
+    class: 'flex flex-col flex-grow overflow-hidden p-6 bg-gray-200',
   },
 })
 export class BookDetailsComponent {
