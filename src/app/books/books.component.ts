@@ -5,7 +5,6 @@ import {
   selectBooksError,
   selectBooksLoading,
 } from './selectors/books.selectors'
-import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-books',
@@ -21,12 +20,7 @@ export class BooksComponent {
   loading$ = this.store.select(selectBooksLoading)
   error$ = this.store.select(selectBooksError)
 
-  constructor(
-    private store: Store,
-    private router: Router
-  ) {}
+  rating = Array.from({ length: 5 }, (_, index) => index + 1)
 
-  goToBookDetails(isbn: string) {
-    this.router.navigate(['/home/category', isbn])
-  }
+  constructor(private store: Store) {}
 }

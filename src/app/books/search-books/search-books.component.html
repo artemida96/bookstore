@@ -8,23 +8,27 @@
     class="flex-1 bg-gray-100 text-gray-700 border rounded py-2 px-3"
   />
   <button
+    type="button"
     (click)="search()"
     class="bg-info hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-md"
   >
     Search
+    <app-icons name="magnifier" class="fill-current w-4"></app-icons>
   </button>
   <button
+    type="button"
     (click)="clearSearch()"
     class="bg-gray-500 text-white font-bold py-2 px-4 rounded shadow-md"
   >
-    Clear Search
+    Clear
   </button>
 </div>
 <button
-  class="bg-gray-600 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded w-32"
+  class="bg-gray-600 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded w-48"
   (click)="toggleFilters()"
 >
   {{ showFilters ? 'Hide Filters' : 'Show Filters' }}
+  <app-icons name="filter" class="fill-current w-4"></app-icons>
 </button>
 
 <div class="mt-4" *ngIf="showFilters">
@@ -38,7 +42,6 @@
     >
       <ng-container *ngFor="let field of formFields">
         <app-input-field
-          [fieldName]="field.name"
           [formControlName]="field.name"
           [formControl]="$any(filterForm?.get(field.name))"
           [label]="field.label"
@@ -66,24 +69,12 @@
 </div>
 
 <div
-  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4"
+  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4 justify-items-center"
 >
   <div
     *ngFor="let book of combinedFilteredBooks$ | async"
     class="block text-decoration-none"
   >
-    <div class="border rounded-lg p-2 w-64 text-center shadow-md bg-gray-50">
-      <img [src]="''" alt="No Image" class="border h-32 w-24 mx-auto" />
-      <div class="font-semibold mt-2">{{ book.title }}</div>
-      <div class="flex flex-col items-center mt-4">
-        <button
-          type="button"
-          class="bg-primary-100 px-4 py-2 rounded-md shadow-md"
-          (click)="goToBookDetails(book.isbn)"
-        >
-          Learn more
-        </button>
-      </div>
-    </div>
+    <app-book-item [bookItem]="book"></app-book-item>
   </div>
 </div>

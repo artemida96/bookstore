@@ -1,6 +1,6 @@
 //according with the data set,json some fields are missing-> optional
 export interface BookDto {
-  isbn: string
+  isbn: string //assume that it is unique-id
   title: string
   subtitle: string
   author: string
@@ -12,6 +12,5 @@ export interface BookDto {
   categories?: string
   rating?: number
   isbn10?: string
-  isbn13?: string
   options?: string
 }

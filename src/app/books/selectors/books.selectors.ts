@@ -117,8 +117,8 @@ function compareField(
 
   return false
 }
-function preprocessString(str: string): string {
-  str = str.toLowerCase()
-  str = str.replace(/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/\s]/g, '')
-  return str
+function preprocessString(searchStr: string): string {
+  searchStr = searchStr.toLowerCase()
+  searchStr = searchStr.replace(/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/\s]/g, '')
+  return searchStr
 }

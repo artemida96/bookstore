@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core'
-import { AbstractControl, FormGroup, ValidationErrors } from '@angular/forms'
+import { FormGroup } from '@angular/forms'
 import { FormFieldConfig } from 'src/app/shared/form/types/form-field-config.type'
 
 @Component({
@@ -8,7 +8,7 @@ import { FormFieldConfig } from 'src/app/shared/form/types/form-field-config.typ
   styleUrls: ['./book-form.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'flex flex-col flex-grow overflow-hidden  ',
+    class: 'flex flex-col flex-grow overflow-hidden ',
   },
 })
 export class BookFormComponent {

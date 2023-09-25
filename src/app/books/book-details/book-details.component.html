@@ -14,7 +14,24 @@
         <span class="text-gray-300 text-lg font-semibold">Image</span>
       </ng-template>
     </div>
+    <div class="flex items-center gap-x-2 mt-4 ml-1">
+      <app-icons name="ionic-person" class="w-4 fill-current"></app-icons>
+      <p class="font-semibold">{{ book.author }}</p>
+    </div>
+    <div class="flex gap-x-2 mt-4">
+      <ng-container *ngFor="let star of rating">
+        <app-icons
+          name="star"
+          class="w-6"
+          [ngClass]="{
+            'fill-yellow-300': star <= (book.rating || 0),
+            'fill-gray-500': star > (book.rating || 0)
+          }"
+        ></app-icons>
+      </ng-container>
+    </div>
   </div>
+
   <div class="w-full lg:w-2/3 flex-1 flex flex-wrap flex-col">
     <span class="font-semibold text-xl w-full">{{ book.title }}</span>
     <div class="mt-4 w-full">

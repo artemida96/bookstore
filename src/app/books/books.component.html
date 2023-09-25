@@ -1,32 +1,8 @@
 <div
-  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+  class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-items-center"
 >
   <div *ngFor="let book of books$ | async" class="block text-decoration-none">
-    <div class="border rounded-lg p-2 w-64 text-center shadow-md bg-gray-50">
-      <div
-        class="w-24 h-32 bg-gray-200 flex items-center justify-center mx-auto"
-      >
-        <img
-          [src]="''"
-          alt="No image"
-          class="w-full h-auto lg:w-64 lg:h-64"
-          *ngIf="''; else noImage"
-        />
-        <ng-template #noImage>
-          <span class="text-gray-300 text-lg font-semibold">Image</span>
-        </ng-template>
-      </div>
-      <div class="font-semibold mt-2">{{ book.title }}</div>
-      <div class="flex flex-col items-center mt-4">
-        <button
-          type="button"
-          class="bg-primary-100 px-4 py-2 rounded-md shadow-md"
-          (click)="goToBookDetails(book.isbn)"
-        >
-          Learn more
-        </button>
-      </div>
-    </div>
+    <app-book-item [bookItem]="book"></app-book-item>
   </div>
+  <router-outlet></router-outlet>
 </div>
-<router-outlet></router-outlet>

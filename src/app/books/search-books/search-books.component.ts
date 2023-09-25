@@ -43,6 +43,8 @@ export class SearchBooksComponent implements OnInit {
 
   private unsubscribe$ = new Subject<void>()
 
+  rating = Array.from({ length: 5 }, (_, index) => index + 1)
+
   formFields: FormFieldConfig[] = [
     {
       name: 'title',
@@ -95,7 +97,7 @@ export class SearchBooksComponent implements OnInit {
       type: 'text',
     },
     {
-      name: 'isbn13',
+      name: 'isbn',
       label: 'ISBN-13',
       type: 'text',
     },
@@ -154,7 +156,6 @@ export class SearchBooksComponent implements OnInit {
   applyFilters() {
     this.clearSearch()
     const filterCriteria = this.filterForm?.value
-    console.log(filterCriteria)
     this.store.dispatch(updateFilter({ filterCriteria }))
   }
 
@@ -179,6 +180,9 @@ export class SearchBooksComponent implements OnInit {
   search() {
     this.store.dispatch(setSearchTerm({ searchTerm: this.searchTerm }))
     this.filteredBooks$ = this.store.select(selectFilteredBooksBySearch)
+    if (this.filterForm?.value) {
+      this.initFilterForm()
+    }
   }
 
   clearSearch() {

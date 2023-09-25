@@ -4,27 +4,33 @@
   >
   <div class="relative" *ngIf="!(type === 'textarea'); else textAreaInput">
     <input
-      [name]="fieldName"
+      [name]="formControlName"
       [placeholder]="placeholder"
       [value]="value"
-      typeField
       [type]="type"
       (input)="onInputChange($event)"
+      (focus)="onFieldFocus()"
       class="w-full flex-grow"
     />
   </div>
   <ng-template #textAreaInput>
     <textarea
+      [name]=""
       [placeholder]="placeholder"
       [value]="value"
       (input)="onInputChange($event)"
+      (focus)="onFieldFocus()"
       class="flex-grow w-full"
     ></textarea>
   </ng-template>
-  <p
-    *ngIf="formControl?.invalid && formControl?.touched"
-    class="text-red-500 text-xs mt-1"
+  <div
+    class="error-message-container"
+    [style.visibility]="
+      formControl?.invalid && isFieldFocused ? 'visible' : 'hidden'
+    "
   >
-    {{ validationMessage }}
-  </p>
+    <p class="text-red-500 text-xs">
+      {{ validationMessage }}
+    </p>
+  </div>
 </div>

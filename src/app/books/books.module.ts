@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store'
 import { BooksEffects } from './effects/books.effects'
 import { booksReducer } from './reducers/books.reducers'
 import { RouterModule, Routes } from '@angular/router'
+import { BookItemModule } from '../shared/book-item/book-item.module'
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
   declarations: [BooksComponent],
   imports: [
     CommonModule,
+    BookItemModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('books', booksReducer),
     EffectsModule.forFeature([BooksEffects]),

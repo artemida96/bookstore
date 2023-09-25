@@ -4,6 +4,8 @@ import { SearchBooksComponent } from './search-books.component'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { RouterModule } from '@angular/router'
 import { FormModule } from 'src/app/shared/form/form-module.module'
+import { IconsModule } from 'src/app/shared/icons/icons.module'
+import { BookItemModule } from 'src/app/shared/book-item/book-item.module'
 
 @NgModule({
   declarations: [SearchBooksComponent],
@@ -12,6 +14,8 @@ import { FormModule } from 'src/app/shared/form/form-module.module'
     ReactiveFormsModule,
     FormsModule,
     FormModule,
+    IconsModule,
+    BookItemModule,
     RouterModule.forChild([
       {
         path: '',

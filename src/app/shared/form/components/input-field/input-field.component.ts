@@ -25,7 +25,7 @@ import {
 })
 export class InputFieldComponent implements ControlValueAccessor {
   @Input() label?: string
-  @Input() fieldName?: string
+  @Input() formControlName?: string
   @Input() placeholder?: string
   @Input() formControl?: FormControl
   @Input() validationMessage?: string
@@ -36,9 +36,10 @@ export class InputFieldComponent implements ControlValueAccessor {
   onChange: any = () => {}
   onTouched: any = () => {}
 
+  isFieldFocused = false
+
   writeValue(value: any): void {
     this.value = value
-    this.onChange(this.value)
   }
 
   registerOnChange(fn: any): void {
@@ -62,5 +63,9 @@ export class InputFieldComponent implements ControlValueAccessor {
 
     this.onChange(this.value)
     this.onTouched()
+  }
+
+  onFieldFocus() {
+    this.isFieldFocused = true
   }
 }

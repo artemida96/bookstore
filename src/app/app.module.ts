@@ -14,7 +14,6 @@ import { LayoutComponent } from './layout/layout.component'
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     RouterModule.forRoot([{ path: '', component: LayoutComponent }]),
     StoreModule.forRoot({}),

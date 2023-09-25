@@ -1,5 +1,12 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core'
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms'
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms'
 import { CreateBookDto } from '../dto/create-book.dto'
 import { addBooks } from '../actions/books.actions'
 import { Store } from '@ngrx/store'
@@ -16,12 +23,23 @@ import { FormFieldConfig } from 'src/app/shared/form/types/form-field-config.typ
   },
 })
 export class AddBookComponent {
+  startsWithUppercase: ValidatorFn = (control: AbstractControl) => {
+    const value = control.value as string
+    if (value && value.length > 0) {
+      const firstChar = value.charAt(0)
+      return /^[A-Z]/.test(firstChar)
+        ? null
+        : { notStartingWithUppercase: true }
+    }
+    return null
+  }
+
   formFields: FormFieldConfig[] = [
     {
       name: 'title',
       label: 'Title',
       type: 'text',
-      validationMessage: 'Please enter a valid title (10-120 characters).',
+      validationMessage: 'Please enter a valid title (10-120 characters)',
       validators: [
         Validators.required,
         Validators.minLength(10),
@@ -34,18 +52,18 @@ export class AddBookComponent {
       label: 'Description',
       type: 'textarea',
       validationMessage:
-        'Please enter a valid description (max 512 characters).',
+        'Please enter a valid description (max 512 characters and first letter uppercase)',
       validators: [
         Validators.required,
         Validators.maxLength(512),
-        Validators.pattern(/[A-Z].*/),
+        this.startsWithUppercase,
       ],
     },
     {
       name: 'categories',
       label: 'Categories',
       type: 'text',
-      validationMessage: 'Please enter valid categories (comma-separated).',
+      validationMessage: 'Please enter valid categories (comma-separated)',
       validators: [
         Validators.required,
         Validators.pattern(/[^,]+(,[^,]+){0,3}/),
@@ -56,7 +74,7 @@ export class AddBookComponent {
       label: 'Author Name',
       type: 'text',
       validationMessage:
-        'Please enter valid author names (comma-separated, max 3 authors).',
+        'Please enter valid author names (comma-separated, max 3 authors)',
       validators: [
         Validators.required,
         Validators.pattern(/[^,]+(,[^,]+){0,2}/),
@@ -67,7 +85,7 @@ export class AddBookComponent {
       label: 'Publisher',
       type: 'text',
       validationMessage:
-        'Please enter a valid publisher (min 5, max 60 characters).',
+        'Please enter a valid publisher (min 5, max 60 characters)',
       validators: [
         Validators.required,
         Validators.minLength(5),
@@ -78,7 +96,7 @@ export class AddBookComponent {
       name: 'published',
       label: 'Year',
       type: 'text',
-      validationMessage: 'Please enter a valid year (4 digits).',
+      validationMessage: 'Please enter a valid year (4 digits)',
       validators: [
         Validators.required,
         Validators.minLength(4),
@@ -90,7 +108,7 @@ export class AddBookComponent {
       name: 'pages',
       label: 'Page Numbers',
       type: 'text',
-      validationMessage: 'Please enter a valid number of pages (max 9999).',
+      validationMessage: 'Please enter a valid number of pages (max 9999)',
       validators: [
         Validators.required,
         Validators.max(9999),
@@ -101,14 +119,12 @@ export class AddBookComponent {
       name: 'options',
       label: 'Options',
       type: 'text',
-      validationMessage: 'Please enter valid options.',
-      validators: [Validators.required],
     },
     {
       name: 'rating',
       label: 'Rating',
       type: 'text',
-      validationMessage: 'Please enter a valid rating from 1 to 5.',
+      validationMessage: 'Please enter a valid rating from 1 to 5',
       validators: [
         Validators.required,
         Validators.min(1),
@@ -120,7 +136,7 @@ export class AddBookComponent {
       name: 'isbn10',
       label: 'ISBN-10',
       type: 'text',
-      validationMessage: 'Please enter a valid ISBN-10 (10 digits).',
+      validationMessage: 'Please enter a valid ISBN-10 (10 digits)',
       validators: [
         Validators.required,
         Validators.minLength(10),
@@ -130,10 +146,10 @@ export class AddBookComponent {
       ],
     },
     {
-      name: 'isbn13',
+      name: 'isbn',
       label: 'ISBN-13',
       type: 'text',
-      validationMessage: 'Please enter a valid ISBN-13 (13 digits).',
+      validationMessage: 'Please enter a valid ISBN-13 (13 digits)',
       validators: [
         Validators.required,
         Validators.minLength(13),
@@ -179,6 +195,7 @@ export class AddBookComponent {
     setTimeout(() => {
       this.router.navigate(['/home'])
     }, 1000)
+    console.log(books)
   }
 
   removeBook(index: number) {

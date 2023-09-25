@@ -3,7 +3,6 @@
     <div class="w-full md:w-2/3 space-y-4">
       <ng-container *ngFor="let field of formFields.slice(0, 7)">
         <app-input-field
-          [fieldName]="field.name"
           [formControlName]="field.name"
           [formControl]="$any(bookForm.get(field.name))"
           [label]="field.label"
@@ -17,7 +16,6 @@
     <div class="w-full md:w-2/3 space-y-4 md:space-y-4">
       <ng-container *ngFor="let field of formFields.slice(7, 11)">
         <app-input-field
-          [fieldName]="field.name"
           [formControlName]="field.name"
           [formControl]="$any(bookForm.get(field.name))"
           [label]="field.label"

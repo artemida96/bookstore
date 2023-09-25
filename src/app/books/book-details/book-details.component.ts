@@ -22,6 +22,8 @@ export class BookDetailsComponent {
 
   books$ = this.store.select(selectBooks)
 
+  rating = Array.from({ length: 5 }, (_, index) => index + 1)
+
   constructor(
     private store: Store,
     private route: ActivatedRoute
