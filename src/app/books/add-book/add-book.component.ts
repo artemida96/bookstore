@@ -67,10 +67,12 @@ export class AddBookComponent {
       name: 'categories',
       label: 'Categories',
       type: 'text',
-      validationMessage: 'Please enter valid categories (comma-separated)',
+      validationMessage:
+        'Please enter valid categories (comma-separated, no trailing comma, and max 4 categories)',
+      //1-4 categories
       validators: [
-        Validators.required,
-        Validators.pattern(/[^,]+(,[^,]+){0,3}/),
+        Validators.required, // extra  check required
+        Validators.pattern(/^([^,]+,){0,3}[^,]+$/), // max 4
       ],
     },
     {
@@ -78,10 +80,11 @@ export class AddBookComponent {
       label: 'Author Name',
       type: 'text',
       validationMessage:
-        'Please enter valid author names (comma-separated, max 3 authors)',
+        'Please enter valid author names (comma-separated,no trailing comma and max 3 authors)',
+      // 1-3 authors
       validators: [
-        Validators.required,
-        Validators.pattern(/[^,]+(,[^,]+){0,2}/),
+        Validators.required, // extra check required
+        Validators.pattern(/^([^,]+,){0,2}[^,]+$/), // max 3
       ],
     },
     {

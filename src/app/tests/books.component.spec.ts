@@ -42,7 +42,7 @@ describe('BooksComponent', () => {
     expect(component).toBeTruthy()
   })
 
-  it('should correctly load books from the store', () => {
+  it('should correctly first load books from the store', () => {
     store.overrideSelector(selectBooks, bookDataSet.books)
     store.overrideSelector(selectBooksLoading, false)
     store.overrideSelector(selectBooksError, null)

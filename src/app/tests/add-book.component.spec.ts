@@ -88,6 +88,7 @@ describe('AddBookComponent', () => {
       },
     ]
 
+    //we update the state books with our data set books
     store.overrideSelector(selectBooks, bookDataSet.books)
 
     store.refreshState()
