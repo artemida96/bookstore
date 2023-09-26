@@ -7,26 +7,15 @@
     placeholder="Search..."
     class="flex-1 bg-gray-100 text-gray-700 border rounded py-2 px-3"
   />
-  <button
-    type="button"
-    (click)="search()"
-    class="bg-info hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-md"
-  >
+  <button type="button" (click)="search()" class="btn-info">
     Search
     <app-icons name="magnifier" class="fill-current w-4"></app-icons>
   </button>
-  <button
-    type="button"
-    (click)="clearSearch()"
-    class="bg-gray-500 text-white font-bold py-2 px-4 rounded shadow-md"
-  >
+  <button type="button" (click)="clearSearch()" class="btn-outline">
     Clear
   </button>
 </div>
-<button
-  class="bg-gray-600 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded w-48"
-  (click)="toggleFilters()"
->
+<button class="btn-outline w-48" (click)="toggleFilters()">
   {{ showFilters ? 'Hide Filters' : 'Show Filters' }}
   <app-icons name="filter" class="fill-current w-4"></app-icons>
 </button>
@@ -51,16 +40,13 @@
       </ng-container>
     </div>
     <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 mb-4">
-      <button
-        [disabled]="isFormUnchanged()"
-        type="submit"
-        class="bg-success text-white font-bold py-2 px-4 rounded shadow-md"
-      >
+      <button [disabled]="isFormUnchanged()" type="submit" class="btn-success">
         Apply Filters
       </button>
       <button
         (click)="resetFilters()"
-        class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded shadow-md"
+        [disabled]="isFormUnchanged()"
+        class="btn-outline"
       >
         Clear Filters
       </button>

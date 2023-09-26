@@ -38,15 +38,8 @@
       <p>{{ book.description }}</p>
     </div>
     <div class="flex gap-x-2 mt-4">
-      <button
-        type="button"
-        class="px-4 py-2 bg-primary-200 rounded-md shadow-md"
-      >
-        Favorite
-      </button>
-      <button type="button" class="px-4 py-2 bg-info rounded-md shadow-md">
-        Share
-      </button>
+      <button disabled class="btn-primary" type="button">Favorite</button>
+      <button type="button" class="btn-info" disabled>Share</button>
     </div>
     <div class="flex flex-col gap-3 mt-4">
       <p class="w-full"><strong>Category:</strong> {{ book.categories }}</p>
@@ -60,12 +53,7 @@
       <p class="w-full"><strong>ISBN-10:</strong> {{ book.isbn10 }}</p>
       <p class="w-full"><strong>ISBN-13:</strong> {{ book.isbn }}</p>
       <div class="flex justify-end">
-        <button
-          type="button"
-          class="px-8 py-2 bg-secondary rounded-md shadow-md"
-        >
-          Buy
-        </button>
+        <button type="button" disabled class="btn-info w-32">Buy</button>
       </div>
     </div>
   </div>

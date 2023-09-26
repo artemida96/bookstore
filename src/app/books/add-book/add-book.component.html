@@ -13,7 +13,7 @@
       <button
         type="button"
         (click)="removeBook(i)"
-        class="self-center bg-warning w-32 rounded-md py-2 shadow-md"
+        class="self-center w-32 btn-warning"
       >
         Remove Book
       </button>
@@ -25,7 +25,7 @@
   </div>
   <button
     type="button"
-    class="mt-8 self-center bg-primary w-48 rounded-md py-2 shadow-md"
+    class="mt-8 self-center btn-primary"
     (click)="addNewBook()"
   >
     Add Another Book
@@ -34,11 +34,11 @@
 
   <button
     type="button"
-    [ngClass]="booksSaved ? 'bg-success' : 'bg-primary-200'"
-    class="mt-8 self-start w-64 px-4 py-2 bg-info rounded-md shadow-md"
+    [ngClass]="booksSaved ? 'btn-success' : 'btn-primary-secondary'"
+    class="mt-8 self-start w-64"
     [disabled]="isAnyFormGroupInvalid()"
     (click)="save()"
   >
-    {{ booksSaved ? 'Books saved' : 'Save' }}
+    {{ booksSaved ? bookFormArray.controls.length + ' Book(s) saved' : 'Save' }}
   </button>
 </div>

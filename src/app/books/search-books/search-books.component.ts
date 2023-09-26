@@ -180,9 +180,6 @@ export class SearchBooksComponent implements OnInit {
   search() {
     this.store.dispatch(setSearchTerm({ searchTerm: this.searchTerm }))
     this.filteredBooks$ = this.store.select(selectFilteredBooksBySearch)
-    if (this.filterForm?.value) {
-      this.initFilterForm()
-    }
   }
 
   clearSearch() {

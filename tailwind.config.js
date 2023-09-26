@@ -54,14 +54,15 @@ module.exports = {
           DEFAULT: '#f4c430',
           100: '#FFAC1C',
           200: '#E49B0F',
+          300: '#dc7d00',
         },
-        secondary: colors.blue[500],
-        info: '#99ccff',
+        secondary: '#E49B0F',
+        info: '#77aaff',
         warning: '#cc2f00',
         danger: '#ac0404',
         light: '#f8f9fa',
         dark: '#212529',
-        success: colors.green[700],
+        success: colors.green[800],
       },
       borderColor: {
         primary: {
