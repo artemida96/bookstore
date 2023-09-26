@@ -112,13 +112,13 @@ function compareField(
     const fieldValueStr = preprocessString(fieldValue.toString())
     const filterValueStr = preprocessString(filterValue.toString())
 
-    return fieldValueStr === filterValueStr
+    return fieldValueStr.includes(filterValueStr) // if it is subset
   }
 
   return false
 }
 function preprocessString(searchStr: string): string {
   searchStr = searchStr.toLowerCase()
-  searchStr = searchStr.replace(/[!@#$%^&*()_+{}\[\]:;<>,.?~\\/\s]/g, '')
+  searchStr = searchStr.replace(/['!@#$%^&*()_+{}\[\]:;<>,.?~\\/\s]/g, '')
   return searchStr
 }
