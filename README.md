@@ -36,16 +36,19 @@ To run the Bookstore application locally, follow these steps:
 1. Clone the repository to your local machine
 
 
-2. Install the required dependencies:
-
-   cd bookstore
+2. Navigate to the project directory:
 
 
-3. Start the development server:
+3. Install the required dependencies:
+
+   npm install
+
+  
+4. Start the development server:
 
    ng serve
 
 
-4. To run tests for the Bookstore application, execute the following command:
+5. To run tests for the Bookstore application, execute the following command:
 
    ng test

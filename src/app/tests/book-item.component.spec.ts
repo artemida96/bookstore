@@ -10,12 +10,12 @@ describe('BookItemComponent', () => {
   let fixture: ComponentFixture<BookItemComponent>
   let router: Router
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule], // Import RouterTestingModule for testing
       declarations: [BookItemComponent],
     }).compileComponents()
-  }))
+  })
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BookItemComponent)
@@ -30,7 +30,7 @@ describe('BookItemComponent', () => {
     fixture.detectChanges()
   })
 
-  it('should create', () => {
+  it('should create the book item component', () => {
     expect(component).toBeTruthy()
   })
 

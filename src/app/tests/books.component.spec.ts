@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
 import { provideMockStore, MockStore } from '@ngrx/store/testing'
 import { BooksComponent } from '../books/books.component'
 import { BooksState } from '../books/reducers/books.reducers'
@@ -38,7 +38,7 @@ describe('BooksComponent', () => {
     store = TestBed.inject(MockStore)
   })
 
-  it('should create', () => {
+  it('should create book component', () => {
     expect(component).toBeTruthy()
   })
 

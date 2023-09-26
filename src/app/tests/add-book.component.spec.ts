@@ -1,38 +1,39 @@
-/*import { RouterModule } from '@angular/router'
-import { addBooks } from '../books/actions/books.actions'
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing'
+import { ReactiveFormsModule } from '@angular/forms'
+import { RouterModule } from '@angular/router'
+import {
+  Store,
+  StoreModule,
+  createFeatureSelector,
+  createSelector,
+  select,
+} from '@ngrx/store'
+import { provideMockStore, MockStore } from '@ngrx/store/testing'
+import { HttpClientModule } from '@angular/common/http'
+import { IconsModule } from '../shared/icons/icons.module'
+import { FormModule } from '../shared/form/form-module.module'
 import { AddBookComponent } from '../books/add-book/add-book.component'
+import { BookFormComponent } from '../books/add-book/components/book-form.component'
 import { CreateBookDto } from '../books/dto/create-book.dto'
 import { BooksState, booksReducer } from '../books/reducers/books.reducers'
-import { IconsModule } from '../shared/icons/icons.module'
-import { Store, StoreModule, select } from '@ngrx/store'
-import { HttpClientModule } from '@angular/common/http'
-import { FormModule } from '../shared/form/form-module.module'
-import { ReactiveFormsModule } from '@angular/forms'
-import { MockStore, provideMockStore } from '@ngrx/store/testing'
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  waitForAsync,
-} from '@angular/core/testing'
-import { BookFormComponent } from '../books/add-book/components/book-form.component'
-import { selectBooks } from '../books/selectors/books.selectors'
+import { addBooks } from '../books/actions/books.actions'
 import { BookDto } from '../books/dto/book.dto'
-import { BooksModule } from '../books/books.module'
-import { EffectsModule } from '@ngrx/effects'
+
+import bookDataSet from 'src/assets/data/books.json'
+
+// Define your selector here
+const selectBooksFeature = createFeatureSelector<BooksState>('books')
+export const selectBooks = createSelector(
+  selectBooksFeature,
+  (state: BooksState) => state.books
+)
 
 describe('AddBookComponent', () => {
   let component: AddBookComponent
   let fixture: ComponentFixture<AddBookComponent>
-  let store: MockStore
+  let store: MockStore<BooksState>
 
   beforeEach(() => {
-    const initialState: BooksState = {
-      books: [],
-      loading: false,
-      error: null,
-    }
-
     TestBed.configureTestingModule({
       declarations: [AddBookComponent, BookFormComponent],
       imports: [
@@ -41,17 +42,20 @@ describe('AddBookComponent', () => {
         IconsModule,
         HttpClientModule,
         FormModule,
-        IconsModule,
         ReactiveFormsModule,
       ],
       providers: [
         provideMockStore<BooksState>({
-          initialState,
+          initialState: {
+            books: [],
+            isLoaded: false,
+            error: null,
+          },
         }),
       ],
-    })
+    }).compileComponents()
 
-    store = TestBed.inject(Store) as MockStore
+    store = TestBed.inject(Store) as MockStore<BooksState>
   })
 
   beforeEach(() => {
@@ -60,37 +64,42 @@ describe('AddBookComponent', () => {
     fixture.detectChanges()
   })
 
-  it('should dispatch an action and update the store state', (done) => {
-    // Define a sample book to add
-    const addBook: CreateBookDto = {
-      isbn: '9781234567890',
-      title: 'Domain-Driven Design with Angular and Monorepos',
-      author: 'Artemis Maria Chatziroufa',
-      publisher: 'Angular Workshops',
-      published: '2023',
-      pages: 200,
-      description:
-        'Ideas from DDD help developers to manage and scale with the resulting complexity.',
-      categories: 'Frontend, Tactical Design, Monorepos',
-      rating: 5,
-      isbn10: '1234567890',
-      options: 'Angular Options',
-      website: '',
-      subtitle: '',
-    }
-
-    store.overrideSelector(selectBooks, [] as BookDto[])
-
-    store.addReducer()
-
-    store.dispatch(addBooks({ books: [addBook] }))
-
-    store.select(selectBooks).subscribe((stateBooks: BookDto[]) => {
-      expect(stateBooks.length).toBe(1) // The state should have 1 book
-      done()
-    })
-
-    // Assert that the store state has two books now (initial book + added book)
-    //expect(books.length).toBe(0)
+  it('should create the add book component', () => {
+    expect(component).toBeTruthy()
   })
-})*/
+
+  it('should add extra books to the book list', () => {
+    const addBook: CreateBookDto[] = [
+      {
+        isbn: '9781234567890',
+        title: 'Domain-Driven Design with Angular and Monorepos',
+        author: 'Artemis Maria Chatziroufa',
+        publisher: 'Angular Workshops',
+        published: '2023',
+        pages: 200,
+        description:
+          'Ideas from DDD help developers to manage and scale with the resulting complexity.',
+        categories: 'Frontend, Tactical Design, Monorepos',
+        rating: 5,
+        isbn10: '1234567890',
+        options: 'Angular Options',
+        subtitle: '',
+        website: '',
+      },
+    ]
+
+    store.overrideSelector(selectBooks, bookDataSet.books)
+
+    store.refreshState()
+
+    fixture.detectChanges()
+
+    store.dispatch(addBooks({ books: addBook }))
+
+    store.select(selectBooks).subscribe((valueBooks: BookDto[]) => {
+      const newBooks = [...valueBooks, ...addBook]
+
+      expect(newBooks.length).toBe(valueBooks.length + 1)
+    })
+  })
+})

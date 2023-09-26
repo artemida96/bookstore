@@ -1,4 +1,4 @@
-import { TestBed } from '@angular/core/testing'
+import { TestBed, waitForAsync } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 
 import { BrowserModule } from '@angular/platform-browser'
@@ -12,8 +12,8 @@ import { LayoutComponent } from '../layout/layout.component'
 import { AppComponent } from '../app.component'
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
         BrowserModule,
@@ -26,7 +26,7 @@ describe('AppComponent', () => {
       ],
       declarations: [AppComponent],
     }).compileComponents()
-  })
+  }))
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent)
