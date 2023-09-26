@@ -1,4 +1,5 @@
-//according with the create book these fields are mandatory
+/*according with the create book these fields are mandatory
+ so created a new dto to avoid type check errors*/
 
 import { BookDto } from './book.dto'
 

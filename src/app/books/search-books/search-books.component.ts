@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  OnDestroy,
-  OnInit,
-} from '@angular/core'
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup } from '@angular/forms'
 import { Store } from '@ngrx/store'
 import { setSearchTerm, updateFilter } from '../actions/books.actions'
@@ -24,6 +19,10 @@ import {
 import { BookDto } from '../dto/book.dto'
 import { NavigationEnd, Router } from '@angular/router'
 import { FormFieldConfig } from 'src/app/shared/form/types/form-field-config.type'
+
+/*Filters: Books can be filtered either by the search input or by using the 
+ filter panel form, but not both simultaneously.
+ In either case, applying one filter type excludes the other.*/
 
 @Component({
   selector: 'app-search-books',
@@ -139,7 +138,7 @@ export class SearchBooksComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private store: Store,
-    private router: Router // Inject the Router service
+    private router: Router
   ) {}
 
   initFilterForm() {
@@ -153,6 +152,7 @@ export class SearchBooksComponent implements OnInit {
     this.store.dispatch(updateFilter({ filterCriteria: undefined }))
   }
 
+  //apply filters will clear the search input
   applyFilters() {
     this.clearSearch()
     const filterCriteria = this.filterForm?.value
@@ -177,6 +177,7 @@ export class SearchBooksComponent implements OnInit {
     this.router.navigate(['/home/category', isbn])
   }
 
+  //apply search will ignore extra filters from the filter panel
   search() {
     this.store.dispatch(setSearchTerm({ searchTerm: this.searchTerm }))
     this.filteredBooks$ = this.store.select(selectFilteredBooksBySearch)

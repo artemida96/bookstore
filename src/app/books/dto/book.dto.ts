@@ -1,6 +1,6 @@
 //according with the data set,json some fields are missing-> optional
 export interface BookDto {
-  isbn: string //assume that it is unique-id
+  isbn: string //assume that it is unique-id and it is the isbn-13
   title: string
   subtitle: string
   author: string

@@ -1,10 +1,6 @@
-import {
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  forwardRef,
-} from '@angular/core'
+/* Implemented a reusable input function to streamline input
+ collection and eliminate redundant code */
+import { Component, Input, forwardRef } from '@angular/core'
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,

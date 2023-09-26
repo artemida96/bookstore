@@ -11,7 +11,7 @@ export const selectBooks = createSelector(
 
 export const selectBooksLoading = createSelector(
   selectBooksState,
-  (state) => state.loading
+  (state) => state.isLoaded
 )
 
 export const selectBooksError = createSelector(
@@ -51,7 +51,9 @@ export const selectFilteredBooksBySearch = createSelector(
   }
 )
 
-//This way, items will only be included in the results if they match all the applied filter criteria with AND
+/* Selects books with a search approach for text fields, and applies an "AND" operator
+ when filtering based on other fields*/
+
 export const selectFilteredBooks = createSelector(
   selectBooks,
   selectFilterCriteria,
@@ -112,11 +114,14 @@ function compareField(
     const fieldValueStr = preprocessString(fieldValue.toString())
     const filterValueStr = preprocessString(filterValue.toString())
 
-    return fieldValueStr.includes(filterValueStr) // if it is subset
+    return fieldValueStr.includes(filterValueStr) // if it is subset and not strickly equal
   }
 
   return false
 }
+
+/* Converts the input string to lowercase and removes certain characters
+to improve searchability and consistency.*/
 function preprocessString(searchStr: string): string {
   searchStr = searchStr.toLowerCase()
   searchStr = searchStr.replace(/['!@#$%^&*()_+{}\[\]:;<>,.?~\\/\s]/g, '')

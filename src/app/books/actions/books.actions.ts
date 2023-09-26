@@ -1,3 +1,4 @@
+//Actions for load the books, add books, search books by term and filter by book fields
 import { createAction, props } from '@ngrx/store'
 import { CreateBookDto } from '../dto/create-book.dto'
 import { BookDto } from '../dto/book.dto'

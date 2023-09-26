@@ -13,6 +13,10 @@ import { Store } from '@ngrx/store'
 import { Router } from '@angular/router'
 import { FormFieldConfig } from 'src/app/shared/form/types/form-field-config.type'
 
+/*"Allow users to add one or more books, 
+and only enable book creation when all book forms and required book details 
+are filled out with appropriate validation and informative error messages."*/
+
 @Component({
   selector: 'app-add-book',
   templateUrl: './add-book.component.html',
@@ -133,6 +137,7 @@ export class AddBookComponent {
       ],
     },
     {
+      // we assume that isbn-13 is unique-> b/e concern to handle it
       name: 'isbn10',
       label: 'ISBN-10',
       type: 'text',
@@ -185,7 +190,9 @@ export class AddBookComponent {
   addNewBook() {
     this.bookFormArray.push(this.createFormGroup())
   }
-  /*if we had b/e make endpoint and add book, implement effect + reducer*/
+  /*if we had b/e make endpoint and add book, 
+  implement effect + reducer, and we assume that isbn-13 
+  is unique-> b/e concern to handle it*/
   save() {
     const books: CreateBookDto[] = this.bookFormArray.controls.map(
       (control) => control.value

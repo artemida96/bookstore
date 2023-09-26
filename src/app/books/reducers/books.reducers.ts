@@ -1,3 +1,5 @@
+// Manages the state for books, including loading, adding, filtering, and error handling.
+
 import { createReducer, on } from '@ngrx/store'
 import {
   addBooks,
@@ -12,7 +14,7 @@ import { CreateBookDto } from '../dto/create-book.dto'
 
 export interface BooksState {
   books: BookDto[]
-  loading: boolean
+  isLoaded: boolean
   error?: any
   filterCriteria?: CreateBookDto
   search?: string
@@ -20,7 +22,7 @@ export interface BooksState {
 
 const initialState: BooksState = {
   books: [],
-  loading: false,
+  isLoaded: false,
   error: null,
 }
 
@@ -28,17 +30,17 @@ export const booksReducer = createReducer(
   initialState,
   on(loadBooks, (state) => ({
     ...state,
-    loading: true,
+    isLoaded: false,
     error: null,
   })),
   on(loadBooksSuccess, (state, action) => ({
     ...state,
     books: action.books,
-    loading: false,
+    isLoaded: true,
   })),
   on(loadBooksFailure, (state, action) => ({
     ...state,
-    loading: false,
+    isLoaded: false,
     error: action.error,
   })),
   on(addBooks, (state, action) => {

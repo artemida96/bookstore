@@ -26,7 +26,7 @@ describe('BooksComponent', () => {
         provideMockStore<BooksState>({
           initialState: {
             books: [],
-            loading: false,
+            isLoaded: false,
             error: null,
           },
         }),
