@@ -95,7 +95,7 @@ export class AddBookComponent {
     {
       name: 'published',
       label: 'Year',
-      type: 'number',
+      type: 'string',
       validationMessage: 'Please enter a valid year (4 digits)',
       validators: [
         Validators.required,
@@ -195,7 +195,6 @@ export class AddBookComponent {
     setTimeout(() => {
       this.router.navigate(['/home'])
     }, 1000)
-    console.log(books)
   }
 
   removeBook(index: number) {
