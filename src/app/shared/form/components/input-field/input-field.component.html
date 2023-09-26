@@ -4,6 +4,7 @@
   >
   <div class="relative" *ngIf="!(type === 'textarea'); else textAreaInput">
     <input
+      [id]="formControlName"
       [name]="formControlName"
       [placeholder]="placeholder"
       [value]="value"
@@ -15,7 +16,8 @@
   </div>
   <ng-template #textAreaInput>
     <textarea
-      [name]=""
+      [id]="formControlName"
+      [name]="formControlName"
       [placeholder]="placeholder"
       [value]="value"
       (input)="onInputChange($event)"
@@ -24,7 +26,6 @@
     ></textarea>
   </ng-template>
   <div
-    class="error-message-container"
     [style.visibility]="
       formControl?.invalid && isFieldFocused ? 'visible' : 'hidden'
     "

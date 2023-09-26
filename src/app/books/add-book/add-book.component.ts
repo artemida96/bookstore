@@ -95,7 +95,7 @@ export class AddBookComponent {
     {
       name: 'published',
       label: 'Year',
-      type: 'text',
+      type: 'number',
       validationMessage: 'Please enter a valid year (4 digits)',
       validators: [
         Validators.required,
@@ -107,7 +107,7 @@ export class AddBookComponent {
     {
       name: 'pages',
       label: 'Page Numbers',
-      type: 'text',
+      type: 'number',
       validationMessage: 'Please enter a valid number of pages (max 9999)',
       validators: [
         Validators.required,
@@ -123,7 +123,7 @@ export class AddBookComponent {
     {
       name: 'rating',
       label: 'Rating',
-      type: 'text',
+      type: 'number',
       validationMessage: 'Please enter a valid rating from 1 to 5',
       validators: [
         Validators.required,

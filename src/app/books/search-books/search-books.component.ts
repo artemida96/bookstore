@@ -74,7 +74,7 @@ export class SearchBooksComponent implements OnInit {
     {
       name: 'published',
       label: 'Year',
-      type: 'text',
+      type: 'number',
     },
     {
       name: 'pages',
@@ -89,7 +89,7 @@ export class SearchBooksComponent implements OnInit {
     {
       name: 'rating',
       label: 'Rating',
-      type: 'text',
+      type: 'number',
     },
     {
       name: 'isbn10',

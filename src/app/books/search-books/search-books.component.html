@@ -7,15 +7,15 @@
     placeholder="Search..."
     class="flex-1 bg-gray-100 text-gray-700 border rounded py-2 px-3"
   />
-  <button type="button" (click)="search()" class="btn-info">
+  <button id="search" type="button" (click)="search()" class="btn-info">
     Search
     <app-icons name="magnifier" class="fill-current w-4"></app-icons>
   </button>
-  <button type="button" (click)="clearSearch()" class="btn-outline">
+  <button id="clear" type="button" (click)="clearSearch()" class="btn-outline">
     Clear
   </button>
 </div>
-<button class="btn-outline w-48" (click)="toggleFilters()">
+<button id="toggleFilters" class="btn-outline w-48" (click)="toggleFilters()">
   {{ showFilters ? 'Hide Filters' : 'Show Filters' }}
   <app-icons name="filter" class="fill-current w-4"></app-icons>
 </button>
@@ -40,10 +40,16 @@
       </ng-container>
     </div>
     <div class="flex flex-col sm:flex-row gap-2 sm:gap-4 mb-4">
-      <button [disabled]="isFormUnchanged()" type="submit" class="btn-success">
+      <button
+        id="applyFilters"
+        [disabled]="isFormUnchanged()"
+        type="submit"
+        class="btn-success"
+      >
         Apply Filters
       </button>
       <button
+        id="clearFilters"
         (click)="resetFilters()"
         [disabled]="isFormUnchanged()"
         class="btn-outline"
