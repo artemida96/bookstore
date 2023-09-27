@@ -47,7 +47,7 @@ To run the Bookstore application locally, follow these steps:
    ng serve
 
 
-## Running the Application
+## Running Tests
 
 1. To run tests for the Bookstore application, execute the following command:
 
