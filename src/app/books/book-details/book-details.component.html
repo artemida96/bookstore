@@ -62,3 +62,18 @@
     </div>
   </div>
 </div>
+
+<ng-container *ngIf="$any(sameBooksByCategory$ | async)?.length > 0">
+  <div class="text-2xl text-gray-800 mt-4">Other books you may like</div>
+
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4 justify-items-center"
+  >
+    <div *ngFor="let book of sameBooksByCategory$ | async">
+      <app-book-item
+        class="block text-decoration-none"
+        [bookItem]="book"
+      ></app-book-item>
+    </div>
+  </div>
+</ng-container>

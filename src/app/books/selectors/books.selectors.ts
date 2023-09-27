@@ -33,6 +33,25 @@ export const selectSearchTerm = createSelector(
   (state) => state.search
 )
 
+export const selectBooksBySameCategories = (bookId: string) =>
+  createSelector(selectBooks, (books) => {
+    const selectedBook = books.find((book) => book.isbn === bookId)
+    if (!selectedBook) {
+      return []
+    }
+    return books.filter(
+      (book) =>
+        book?.categories
+          ?.split(',')
+          .some(
+            (category) =>
+              selectedBook?.categories &&
+              preprocessString(selectedBook?.categories) ===
+                preprocessString(category) &&
+              book.isbn !== selectedBook.isbn
+          )
+    )
+  })
 export const selectFilteredBooksBySearch = createSelector(
   selectBooks,
   selectSearchTerm,
