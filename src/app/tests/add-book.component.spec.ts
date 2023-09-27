@@ -21,8 +21,7 @@ import { BookDto } from '../books/dto/book.dto'
 
 import bookDataSet from 'src/assets/data/books.json'
 
-// Define your selector here
-const selectBooksFeature = createFeatureSelector<BooksState>('books')
+const selectBooksFeature = createFeatureSelector<BooksState>('books') //define the selector
 export const selectBooks = createSelector(
   selectBooksFeature,
   (state: BooksState) => state.books
