@@ -39,12 +39,12 @@ To run the Bookstore application locally, follow these steps:
 
 3. Install the required dependencies:
 
-   npm install
+   npm install or npm ci
 
   
 4. Start the development server:
 
-   ng serve
+   npm start
 
 
 ## Running Tests

@@ -41,14 +41,17 @@ export const selectBooksBySameCategories = (bookId: string) =>
     }
     return books.filter(
       (book) =>
-        book?.categories
+        book.categories
           ?.split(',')
           .some(
             (category) =>
-              selectedBook?.categories &&
-              preprocessString(selectedBook?.categories) ===
-                preprocessString(category) &&
-              book.isbn !== selectedBook.isbn
+              selectedBook.categories
+                ?.split(',')
+                .some(
+                  (selectedCategory) =>
+                    preprocessString(selectedCategory) ===
+                    preprocessString(category)
+                ) && book.isbn !== selectedBook.isbn
           )
     )
   })
