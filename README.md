@@ -7,8 +7,6 @@ Welcome to the Bookstore, an Angular application for managing and exploring a co
 - [Technologies Used](#technologies-used)
 - [Running the Application](#running-the-application)
 - [Running Tests](#running-tests)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
@@ -49,6 +47,8 @@ To run the Bookstore application locally, follow these steps:
    ng serve
 
 
-5. To run tests for the Bookstore application, execute the following command:
+## Running the Application
+
+1. To run tests for the Bookstore application, execute the following command:
 
    ng test
